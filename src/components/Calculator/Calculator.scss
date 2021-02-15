@@ -1,0 +1,29 @@
+.calculator{
+  border: 1px solid black;
+  background-color: #cfe2f3;
+  width:400px;
+  height: 600px;
+  margin: 0 auto;
+  margin-top: 5%;
+  padding: 50px;
+  display: grid;
+  grid-gap: 50px;
+  grid-template-columns: 100%;
+  grid-template-rows: 2fr 6fr;
+  &-field{
+    display: inline-grid;
+    background-color: white;
+    grid-template-columns: 100%;
+    grid-template-rows: 100%;
+    height:100px;
+  }
+  &-buttons{
+    display: inline-grid;
+    grid-template-columns: repeat(4, 62.5px);
+    grid-template-rows: repeat(6, 50px);
+    grid-gap: 50px;
+    .equal-button{
+      grid-column:3/5 ;
+    }
+  }
+}
