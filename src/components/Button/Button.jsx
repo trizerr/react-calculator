@@ -2,7 +2,7 @@ import './Button.scss';
 
 const Button = (props) =>{
     let pressed = () =>{
-        debugger;
+
         props.buttonPressed(props.value, props.type);
     }
     return(

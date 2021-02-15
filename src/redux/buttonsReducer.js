@@ -30,7 +30,7 @@ export let buttonsReducer = (state = initialState, action) => {
         case BUTTON_PRESSED:
             switch (action.buttonType) {
                 case NUMBER: {
-                    debugger;
+
                     return numberEntered(state, action.button)
                 }
                 case OPERATION: {
@@ -46,7 +46,6 @@ export let buttonsReducer = (state = initialState, action) => {
                 isLoggedIn: true,
                 wrongPassword: false
             }
-
         default:
             return state;
     }
@@ -64,9 +63,6 @@ let numberEntered = (state, number) => {
     state.numbers[state.numberIndex] = newNumber; //add number to array
     let result = calculate(state.operations, state.numbers); //find result
     let newField = state.field + number;
-    debugger;
-
-    debugger;
     return {
         ...state,
         currentNumber: newNumber,
@@ -75,7 +71,7 @@ let numberEntered = (state, number) => {
         result: result,
         isOperationAllowed: isOperationAllowed(newField),
         isDotAllowed: isDotAllowed(newNumber),
-        isNumberAllowed:isNumberAllowed(newField)
+        isNumberAllowed: isNumberAllowed(newField)
     }
 }
 let operationEntered = (state, operation) => {
@@ -94,7 +90,7 @@ let operationEntered = (state, operation) => {
             resultCalculated: false,
             result: result,
             isDotAllowed: false,
-            isNumberAllowed:isNumberAllowed(newField)
+            isNumberAllowed: isNumberAllowed(newField)
         }
     }
     return {
@@ -107,7 +103,7 @@ let operationEntered = (state, operation) => {
         resultCalculated: false,
         result: result,
         isDotAllowed: false,
-        isNumberAllowed:isNumberAllowed(newField)
+        isNumberAllowed: isNumberAllowed(newField)
     }
 }
 let functionalEntered = (state, button) => {
@@ -125,7 +121,7 @@ let functionalEntered = (state, button) => {
                 isOperationAllowed: true,
                 resultCalculated: true,
                 isDotAllowed: false,
-                isNumberAllowed:true
+                isNumberAllowed: true
             }
         }
         case CLEAR: {
@@ -140,17 +136,15 @@ let functionalEntered = (state, button) => {
                 isOperationAllowed: false,
                 resultCalculated: false,
                 isDotAllowed: false,
-                isNumberAllowed:true
+                isNumberAllowed: true
             }
         }
         case DELETE: {
-            debugger;
+
             let newField = state.field.slice(0, -1);
             let isLastCharNumeric = Number(state.field.slice(-1)); //check is last character is numeric
             if (isLastCharNumeric || state.field.slice(-1) === '.' || state.field.slice(-1) === '0') {
-                debugger;
                 state.currentNumber = state.currentNumber.slice(0, -1);
-                debugger;
                 state.numbers[state.numberIndex] = state.currentNumber; //delete number
                 let result;
                 if (state.currentNumber === '') {
@@ -161,7 +155,6 @@ let functionalEntered = (state, button) => {
                 } else {
                     result = calculate(state.operations, state.numbers);
                 }
-
                 return {
                     ...state,
                     field: newField,
@@ -170,7 +163,7 @@ let functionalEntered = (state, button) => {
                     isOperationAllowed: isOperationAllowed(newField),
                     resultCalculated: false,
                     isDotAllowed: isDotAllowed(state.currentNumber),
-                    isNumberAllowed:isNumberAllowed(newField)
+                    isNumberAllowed: isNumberAllowed(newField)
                 }
             } else {
                 state.operations.pop(); //delete operation
@@ -191,15 +184,12 @@ let functionalEntered = (state, button) => {
                     isOperationAllowed: isOperationAllowed(newField),
                     resultCalculated: false,
                     isDotAllowed: isDotAllowed(state.numbers[newNumberIndex]),
-                    isNumberAllowed:isNumberAllowed(newField)
+                    isNumberAllowed: isNumberAllowed(newField)
                 }
             }
-
-
         }
         default:
             return {...state}
-
     }
 }
 

@@ -17,7 +17,6 @@ let mapStateToProps = (state) =>{
         isDotAllowed: state.buttons.isDotAllowed,
         isNumberAllowed: state.buttons.isNumberAllowed
     }
-
 }
 
 export default connect(mapStateToProps, {buttonPressed})(CalculatorContainer);
