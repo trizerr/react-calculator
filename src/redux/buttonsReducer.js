@@ -30,7 +30,6 @@ export let buttonsReducer = (state = initialState, action) => {
         case BUTTON_PRESSED:
             switch (action.buttonType) {
                 case NUMBER: {
-
                     return numberEntered(state, action.button)
                 }
                 case OPERATION: {
@@ -57,12 +56,15 @@ let numberEntered = (state, number) => {
     let newNumber;
     if (state.resultCalculated)
         state = functionalEntered(state, CLEAR); //when result is shown and number entered
+
     state.currentNumber === null ?//check if current number is not empty
         newNumber = number :
         newNumber = state.currentNumber + number;
+
     state.numbers[state.numberIndex] = newNumber; //add number to array
     let result = calculate(state.operations, state.numbers); //find result
     let newField = state.field + number;
+
     return {
         ...state,
         currentNumber: newNumber,
@@ -78,7 +80,7 @@ let operationEntered = (state, operation) => {
     let result = state.result;
     let newField = state.field + operation;
     if (operation === '%') {
-        state.operations.push(operation);
+        state.operations.push(operation); //push and pop operation for calculating result
         result = calculate(state.operations, state.numbers);
         state.operations.pop();
         return {
@@ -140,10 +142,11 @@ let functionalEntered = (state, button) => {
             }
         }
         case DELETE: {
-
             let newField = state.field.slice(0, -1);
             let isLastCharNumeric = Number(state.field.slice(-1)); //check is last character is numeric
+
             if (isLastCharNumeric || state.field.slice(-1) === '.' || state.field.slice(-1) === '0') {
+                //check if last symbol is not operation
                 state.currentNumber = state.currentNumber.slice(0, -1);
                 state.numbers[state.numberIndex] = state.currentNumber; //delete number
                 let result;
@@ -193,14 +196,6 @@ let functionalEntered = (state, button) => {
     }
 }
 
-let isOperationAllowed = (field) => {
-    return Number(field.slice(-1)) || field.slice(-1) === '0' || field.slice(-1) === '%';
-}
-
-let isDotAllowed = (number) => {
-    let array = Array.from(number);
-    return !array.some(symbol => symbol === '.');
-}
-let isNumberAllowed = (currentNumber) => {
-    return currentNumber.slice(-1) !== '%';
-}
+let isOperationAllowed = (field) => Number(field.slice(-1)) || field.slice(-1) === '0' || field.slice(-1) === '%';
+let isDotAllowed = (number) => !Array.from(number).some(symbol => symbol === '.');
+let isNumberAllowed = (currentNumber) => currentNumber.slice(-1) !== '%';

@@ -39,9 +39,7 @@ export let calculate = (operations, numbers) => {
 }
 
 let parseToNumber = (numbers) => {
-    return numbers.map((number) => {
-        return Number(number)
-    });
+    return numbers.map((number) => Number(number));
 }
 
 let filter = (operations, numbers, index) => {
@@ -57,18 +55,8 @@ let filterAfterPercent = (operations, index) => {
     return operations;
 }
 
-let findMultiplication = (array) => {
-    return array.findIndex(operation => operation === '*');
-}
-let findDevision = (array) => {
-    return array.findIndex(operation => operation === '/');
-}
-let findAddition = (array) => {
-    return array.findIndex(operation => operation === '+');
-}
-let findSubtraction = (array) => {
-    return array.findIndex(operation => operation === '-');
-}
-let findPercent = (array) => {
-    return array.findIndex(operation => operation === '%');
-}
+let findMultiplication = (array) => array.findIndex(operation => operation === '*');
+let findDevision = (array) => array.findIndex(operation => operation === '/');
+let findAddition = (array) => array.findIndex(operation => operation === '+');
+let findSubtraction = (array) => array.findIndex(operation => operation === '-');
+let findPercent = (array) => array.findIndex(operation => operation === '%');
